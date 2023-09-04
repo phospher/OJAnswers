@@ -1,7 +1,7 @@
+#include"1010.h"
+#include<algorithm>
 #include<iostream>
 #include<vector>
-#include<algorithm>
-#include"1010.h"
 
 using namespace std;
 
@@ -10,8 +10,9 @@ struct StampType
 	int id;
 	int demon;
 
-	bool operator < (StampType& b);
+	bool operator< (const StampType& b) const;
 };
+
 class CustomerCalculator
 {
 private:
@@ -37,7 +38,7 @@ public:
 
 vector<StampType>* inputStampType();
 
-bool StampType::operator < (StampType& b)
+bool StampType::operator< (const StampType& b) const
 {
 	return this->id < b.id;
 }
@@ -61,32 +62,6 @@ void CustomerCalculator::calBestCombination()
 	this->setupNewChoice(this->m_customer, choices);
 }
 
-//void CustomerCalculator::setupNewChoice(int rest, vector<StampType> choices)
-//{
-//	int lastID = choices.size() == 0 ? 0 : choices[choices.size() - 1].id;
-//	choices.resize(choices.size() + 1);
-//	for (vector<StampType>::const_iterator it = this->m_stampTypes->begin() + lastID; it != this->m_stampTypes->end(); it++)
-//	{
-//		if (rest - it->demon < 0)
-//		{
-//			continue;
-//		}
-//		else
-//		{
-//			choices[choices.size() - 1] = *it;
-//			if (rest - it->demon == 0)
-//			{
-//				this->setNewBest(&choices);
-//				continue;
-//			}
-//			if (choices.size() == 4)
-//			{
-//				continue;
-//			}
-//			this->setupNewChoice(rest - it->demon, choices);
-//		}
-//	}
-//}
 
 void CustomerCalculator::setupNewChoice(int rest, vector<StampType> choices)
 {
